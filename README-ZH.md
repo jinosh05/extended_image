@@ -53,7 +53,7 @@
 
 ``` yaml
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.19.4 <4.0.0"
   flutter: '>=2.0'
 dependencies:
   extended_image: ^4.0.0

@@ -18,14 +18,17 @@ final ExtendedPageController _defaultPageController = ExtendedPageController();
 const PageScrollPhysics _kPagePhysics = PageScrollPhysics();
 const ScrollPhysics _defaultScrollPhysics = NeverScrollableScrollPhysics();
 
-final PageMetrics _testPageMetrics = PageMetrics(
-  axisDirection: AxisDirection.down,
-  minScrollExtent: 0,
-  maxScrollExtent: 10,
-  pixels: 5,
-  viewportDimension: 10,
-  viewportFraction: 1.0,
-);
+PageMetrics _getTestPageMetrics(BuildContext context) {
+  return PageMetrics(
+    axisDirection: AxisDirection.down,
+    minScrollExtent: 0,
+    maxScrollExtent: 10,
+    pixels: 5,
+    viewportDimension: 10,
+    viewportFraction: 1.0,
+    devicePixelRatio: MediaQuery.of(context).devicePixelRatio,
+  );
+}
 
 /// whether should scoll page
 bool _defaultCanScrollPage(GestureDetails? gestureDetails) => true;
@@ -211,8 +214,8 @@ class ExtendedImageGesturePageViewState
 
       ///user's physics
       if (widget.physics.parent != null) {
-        canMove =
-            widget.physics.parent!.shouldAcceptUserOffset(_testPageMetrics);
+        canMove = widget.physics.parent!
+            .shouldAcceptUserOffset(_getTestPageMetrics(context));
       }
       if (canMove) {
         switch (widget.scrollDirection) {
@@ -325,7 +328,8 @@ class ExtendedImageGesturePageViewState
     );
 
     if (widget.physics.parent == null ||
-        widget.physics.parent!.shouldAcceptUserOffset(_testPageMetrics)) {
+        widget.physics.parent!
+            .shouldAcceptUserOffset(_getTestPageMetrics(context))) {
       result = RawGestureDetector(
         gestures: _gestureRecognizers,
         behavior: HitTestBehavior.opaque,

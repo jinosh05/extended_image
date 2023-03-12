@@ -2,7 +2,9 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+
 import 'velocity_tracker.dart';
+
 part 'drag_gesture_recognizer_mixin.dart';
 
 enum _DragState {
@@ -32,7 +34,7 @@ class ExtendedVerticalDragGestureRecognizer
       'Migrate to supportedDevices. '
       'This feature was deprecated after v2.3.0-1.0.pre.',
     )
-        super.kind,
+        super.velocityTrackerBuilder,
     super.supportedDevices,
     super.canHorizontalOrVerticalDrag,
   });
@@ -84,7 +86,7 @@ class ExtendedHorizontalDragGestureRecognizer
       'Migrate to supportedDevices. '
       'This feature was deprecated after v2.3.0-1.0.pre.',
     )
-        super.kind,
+        super.velocityTrackerBuilder,
     super.supportedDevices,
     super.canHorizontalOrVerticalDrag,
   });
@@ -148,7 +150,7 @@ abstract class ExtendedDragGestureRecognizer
       'Migrate to supportedDevices. '
       'This feature was deprecated after v2.3.0-1.0.pre.',
     )
-        super.kind,
+        super.allowedButtonsFilter,
     this.dragStartBehavior = DragStartBehavior.start,
     this.velocityTrackerBuilder = _defaultBuilder,
     super.supportedDevices,
